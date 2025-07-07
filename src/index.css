@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Zen Productivity Dashboard Design System */
+
+@layer base {
+  :root {
+    /* Core Colors - Calming and Focused */
+    --background: 220 30% 97%;
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Primary - Zen Blue */
+    --primary: 210 70% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Light Mindful Gray */
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 220 15% 25%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 50%;
+
+    --accent: 170 60% 85%;
+    --accent-foreground: 170 60% 25%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 210 70% 55%;
+
+    /* Priority Status Colors */
+    --success: 140 60% 50%;
+    --success-foreground: 0 0% 100%;
+    --warning: 45 90% 55%;
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 70% 60%;
+    --danger-foreground: 0 0% 100%;
+
+    /* Category Colors */
+    --study: 210 70% 55%;
+    --health: 140 60% 50%;
+    --social: 280 60% 55%;
+    --spiritual: 45 90% 55%;
+
+    /* Gradients and Effects */
+    --gradient-primary: linear-gradient(135deg, hsl(210, 70%, 55%), hsl(170, 60%, 50%));
+    --gradient-success: linear-gradient(135deg, hsl(140, 60%, 50%), hsl(120, 50%, 45%));
+    --gradient-warning: linear-gradient(135deg, hsl(45, 90%, 55%), hsl(35, 80%, 50%));
+    --gradient-danger: linear-gradient(135deg, hsl(0, 70%, 60%), hsl(350, 60%, 55%));
+    
+    --shadow-gentle: 0 4px 20px -2px hsl(220, 30%, 85%);
+    --shadow-focus: 0 8px 30px -4px hsl(210, 70%, 85%);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 220 15% 90%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 220 15% 90%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 220 15% 90%;
+
+    --primary: 210 70% 60%;
+    --primary-foreground: 220 30% 8%;
+
+    --secondary: 220 25% 15%;
+    --secondary-foreground: 220 15% 75%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 170 50% 25%;
+    --accent-foreground: 170 60% 85%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 25% 20%;
+    --input: 220 25% 20%;
+    --ring: 210 70% 60%;
+
+    --shadow-gentle: 0 4px 20px -2px hsl(220, 30%, 5%);
+    --shadow-focus: 0 8px 30px -4px hsl(210, 70%, 15%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/40;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-success {
+    background: var(--gradient-success);
+  }
+  
+  .gradient-warning {
+    background: var(--gradient-warning);
+  }
+  
+  .gradient-danger {
+    background: var(--gradient-danger);
+  }
+  
+  .shadow-gentle {
+    box-shadow: var(--shadow-gentle);
+  }
+  
+  .shadow-focus {
+    box-shadow: var(--shadow-focus);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .text-success {
+    color: hsl(var(--success));
+  }
+  
+  .text-warning {
+    color: hsl(var(--warning));
+  }
+  
+  .text-danger {
+    color: hsl(var(--danger));
+  }
+  
+  .bg-success {
+    background-color: hsl(var(--success));
+  }
+  
+  .bg-warning {
+    background-color: hsl(var(--warning));
+  }
+  
+  .bg-danger {
+    background-color: hsl(var(--danger));
+  }
+}
