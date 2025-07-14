@@ -17,6 +17,7 @@ interface TrackerItem {
 
 const HACKATHONS_KEY = 'zen-dashboard-hackathons';
 const COURSES_KEY = 'zen-dashboard-courses';
+const APPLICATIONS_KEY = 'zen-dashboard-applications';
 const PROJECTS_KEY = 'zen-dashboard-projects';
 const CONTESTS_KEY = 'zen-dashboard-contests';
 
@@ -33,6 +34,8 @@ const Tracker = () => {
   const [courses, setCourses] = useState<TrackerItem[]>([]);
   const [projects, setProjects] = useState<TrackerItem[]>([]);
   const [contests, setContests] = useState<ContestTracker[]>([]);
+  const [applications, setApplications] = useState<TrackerItem[]>([]);
+
 
   useEffect(() => {
     const loadData = () => {
@@ -40,8 +43,10 @@ const Tracker = () => {
       const savedCourses = localStorage.getItem(COURSES_KEY);
       const savedProjects = localStorage.getItem(PROJECTS_KEY);
       const savedContests = localStorage.getItem(CONTESTS_KEY);
+      const savedApplications = localStorage.getItem(APPLICATIONS_KEY);
 
       if (savedHackathons) setHackathons(JSON.parse(savedHackathons));
+      if (savedApplications) setApplications(JSON.parse(savedApplications));
       if (savedCourses) setCourses(JSON.parse(savedCourses));
       if (savedProjects) setProjects(JSON.parse(savedProjects));
       if (savedContests) {
@@ -65,7 +70,7 @@ const Tracker = () => {
     localStorage.setItem(type, JSON.stringify(data));
   };
 
-  const addItem = (type: 'hackathons' | 'courses' | 'projects', item: Omit<TrackerItem, 'id'>) => {
+  const addItem = (type: 'hackathons' | 'applications' | 'courses' | 'projects', item: Omit<TrackerItem, 'id'>) => {
     const newItem: TrackerItem = {
       ...item,
       id: crypto.randomUUID()
@@ -75,7 +80,13 @@ const Tracker = () => {
       const updated = [...hackathons, newItem];
       setHackathons(updated);
       saveData(HACKATHONS_KEY, updated);
-    } else if (type === 'courses') {
+    } 
+    else if (type === 'applications') {
+      const updated = [...applications, newItem];
+      setApplications(updated);
+      saveData(APPLICATIONS_KEY, updated);
+    } 
+    else if (type === 'courses') {
       const updated = [...courses, newItem];
       setCourses(updated);
       saveData(COURSES_KEY, updated);
@@ -86,7 +97,7 @@ const Tracker = () => {
     }
   };
 
-  const updateStatus = (type: 'hackathons' | 'courses' | 'projects', id: string, status: TrackerItem['status']) => {
+  const updateStatus = (type: 'hackathons' | 'applications' |'courses' | 'projects', id: string, status: TrackerItem['status']) => {
     const updateList = (items: TrackerItem[]) => 
       items.map(item => item.id === id ? { ...item, status } : item);
 
@@ -94,7 +105,13 @@ const Tracker = () => {
       const updated = updateList(hackathons);
       setHackathons(updated);
       saveData(HACKATHONS_KEY, updated);
-    } else if (type === 'courses') {
+    }
+    else if (type === 'applications') {
+      const updated = updateList(applications);
+      setApplications(updated);
+      saveData(APPLICATIONS_KEY, updated);
+    }
+     else if (type === 'courses') {
       const updated = updateList(courses);
       setCourses(updated);
       saveData(COURSES_KEY, updated);
@@ -193,7 +210,7 @@ const Tracker = () => {
   }: { 
     title: string; 
     items: TrackerItem[]; 
-    type: 'hackathons' | 'courses' | 'projects';
+    type: 'hackathons' | 'applications' |'courses' | 'projects';
     icon: any;
   }) => {
     const [showForm, setShowForm] = useState(false);
@@ -348,6 +365,13 @@ const Tracker = () => {
             title="Hackathons"
             items={hackathons}
             type="hackathons"
+            icon={Target}
+          />
+
+          <TrackerSection
+            title="Applications"
+            items={applications}
+            type="applications"
             icon={Target}
           />
           
